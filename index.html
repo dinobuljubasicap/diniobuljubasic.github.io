@@ -3,10 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Web App</title>
+    <title>Azure DevOps License Manager</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Hello, GitHub!</h1>
-    <p>This is a simple web app hosted on GitHub.</p>
+    <div class="container">
+        <header>
+            <h1>Azure DevOps License Manager</h1>
+            <p>Check and manage user licenses in Azure DevOps</p>
+        </header>
+
+        <div class="config-section">
+            <h2>Configuration</h2>
+            <div class="form-group">
+                <label for="organization">Organization URL:</label>
+                <input type="text" id="organization" placeholder="https://dev.azure.com/yourorg" required>
+            </div>
+            <div class="form-group">
+                <label for="pat">Personal Access Token:</label>
+                <input type="password" id="pat" placeholder="Your Azure DevOps PAT" required>
+                <small>Required permissions: User Entitlements (Read & Write)</small>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <h2>User Search</h2>
+            <div class="form-group">
+                <label for="searchType">Search by:</label>
+                <select id="searchType">
+                    <option value="name">Name</option>
+                    <option value="email">Email</option>
+                </select>
+            </div>
+            <div class="form-group" id="nameFields">
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" placeholder="Enter first name">
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" placeholder="Enter last name">
+            </div>
+            <div class="form-group" id="emailField" style="display: none;">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter email address">
+            </div>
+            <div class="button-group">
+                <button id="searchBtn" onclick="searchUser()">Search User</button>
+                <button id="clearBtn" onclick="clearFields()">Clear Fields</button>
+            </div>
+        </div>
+
+        <div id="loadingIndicator" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Searching...</p>
+        </div>
+
+        <div id="results" class="results-section" style="display: none;">
+            <h2>Search Results</h2>
+            <div id="userInfo" class="user-info"></div>
+            <div id="licenseInfo" class="license-info"></div>
+            <div id="actionButtons" class="action-buttons"></div>
+        </div>
+
+        <div id="errorMessage" class="error-message" style="display: none;"></div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
